@@ -113,7 +113,7 @@ public class SuperDriver {
             System.out.print("\033[32m[Enter student ID to start project] \033[0m");
             String studentID = input.nextLine();
             while (!(validation.judgeID(studentID) || !validation.judgeIsLong(studentID))) {
-                System.out.println("\033[35m[Please enter a valid student ID] \033[0m");
+                System.out.print("\033[32m[Please enter a valid student ID] \033[0m");
                 studentID = input.nextLine();
             }
 
@@ -154,7 +154,7 @@ public class SuperDriver {
     } // End of StartProject()
 
 
-    // The option 3 : Update Iterm Status
+    // The option 3 : Update Project Status
     protected void updateStatus() {
 
         System.out.println("\033[35m\n---------------\033[0m");
@@ -167,7 +167,7 @@ public class SuperDriver {
             System.out.print("\033[35m[Enter your studentID] \033[0m");
             String studentID = input.nextLine();
             while (!(validation.judgeID(studentID) || !validation.judgeIsLong(studentID))) {
-                System.out.println("\033[35m[Please enter a valid student ID] \033[0m");
+                System.out.print("\033[35m[Please enter a valid student ID] \033[0m");
                 studentID = input.nextLine();
             }
 
@@ -200,7 +200,7 @@ public class SuperDriver {
                     2) Application Succeeded
                     3) Application Failed\033[0m
                     """);
-            System.out.print("\033[35mEnter your update option: \033[0m");
+            System.out.print("\033[35mEnter your update option] \033[0m");
             String optionNumberForTest = input.nextLine();
             while (!validation.judgeIsInt(optionNumberForTest)) {
                 System.out.print("\033[35m[Please enter an integer option] \033[0m");
@@ -250,7 +250,7 @@ public class SuperDriver {
         System.out.print("\033[36m[Enter your studentID] \033[0m");
         String studentID = input.nextLine();
         while (studentID.length() != 12 || !validation.judgeIsLong(studentID)) {
-            System.out.println("\033[36m[Please enter a valid student ID] \033[0m");
+            System.out.print("\033[36m[Please enter a valid student ID] \033[0m");
             studentID = input.nextLine();
         }
 
@@ -361,7 +361,7 @@ public class SuperDriver {
             System.out.print("\033[35m[Enter studentID to delete] \033[0m");
             String studentID = input.nextLine();
             while (!(validation.judgeID(studentID))) {
-                System.out.println("\033[35m[Please enter a valid student ID] \033[0m");
+                System.out.print("\033[35m[Please enter a valid student ID] \033[0m");
                 studentID = input.nextLine();
             }
 
@@ -390,7 +390,7 @@ public class SuperDriver {
             System.out.println("\033[36m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
         } else {
 
-            System.out.print("\"\\033[36m[Enter a name to search]]\\033[0m\"");
+            System.out.print("\033[36m[Enter a name to search] \033[0m");
             String name = input.nextLine().trim();
 
             boolean flag = false;
