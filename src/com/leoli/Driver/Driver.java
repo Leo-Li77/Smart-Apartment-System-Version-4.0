@@ -40,7 +40,7 @@ public class Driver extends SuperDriver {
                 3) Update Project Status
                 4) Display Your Projects
                 5) Display Everyone's Projects
-                6) Accommodation Notice
+                6) Accommodation Agreement
                 7) Sort StudentsID and Display Everyone's Projects
                 8) Delete Student from List
                 9) Search Student with Name\033[0m
