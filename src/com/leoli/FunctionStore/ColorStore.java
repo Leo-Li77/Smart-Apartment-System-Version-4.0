@@ -22,4 +22,14 @@ public class ColorStore {
         return "\u001B[35m" + string + "\u001B[0m";
     }
 
+    public String cyan(String string) {
+        return "\u001B[36m" + string + "\u001B[0m";
+    }
+
+    public String brightBlue(String string) {
+        return "\033[94m" + string + "\033[0m";
+    }
+
+
+
 }

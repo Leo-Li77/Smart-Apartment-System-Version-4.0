@@ -45,13 +45,13 @@ public class SuperDriver {
         String studentIDForTest = input.nextLine();
         while (!validation.judgeID(studentIDForTest) || !validation.judgeUniqueID(studentIDForTest, studentStore) || !validation.judgeIsLong(studentIDForTest)) {
             if (!validation.judgeUniqueID(studentIDForTest, studentStore)) {
-                System.out.print(colorStore.red("[This student ID is already registered] "));
+                System.out.print(colorStore.red("[Please enter an ID not registered] "));
                 studentIDForTest = input.nextLine();
             } else if (!validation.judgeIsLong(studentIDForTest)) {
-                System.out.print(colorStore.red("[All elements should be numbers] "));
+                System.out.print(colorStore.red("[Please enter an ID consists of integers] "));
                 studentIDForTest = input.nextLine();
             } else {
-                System.out.print(colorStore.red("[Student ID must be exactly 12 digits] "));
+                System.out.print(colorStore.red("[Please enter an ID with exactly 12 digits] "));
                 studentIDForTest = input.nextLine();
             }
         }
@@ -125,7 +125,7 @@ public class SuperDriver {
         System.out.println(colorStore.green("---------------"));
 
         if (studentStore.isEmpty()) {
-            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first (Option 1).>"));
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first.>"));
         } else {
             System.out.print(colorStore.green("[Enter student ID to start project] "));
             String studentID = input.nextLine();
@@ -186,21 +186,21 @@ public class SuperDriver {
     protected void updateStatus() {
 
         System.out.println(colorStore.purple("\n---------------"));
-        System.out.println("\033[35m Update Status \033[0m");
-        System.out.println("\033[35m---------------\033[0m");
+        System.out.println(colorStore.purple(" Update Status "));
+        System.out.println(colorStore.purple("---------------"));
 
         if (studentStore.isEmpty()) {
-            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first (Option 1).>"));
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first.>"));
         } else {
-            System.out.print("\033[35m[Enter your studentID] \033[0m");
+            System.out.print(colorStore.purple("[Enter your studentID] "));
             String studentID = input.nextLine();
             while (!validation.judgeID(studentID) || !validation.judgeIsLong(studentID)) {
-                System.out.print("\033[35m[Please enter a valid student ID] \033[0m");
+                System.out.print(colorStore.red("[Please enter a valid student ID] "));
                 studentID = input.nextLine();
             }
 
-            System.out.print("""
-                    \033[35m--------------------------
+            System.out.print(colorStore.purple("""
+                    \n--------------------------
                      Choose Project to Update
                     --------------------------
                     1) Accommodation Application
@@ -209,11 +209,11 @@ public class SuperDriver {
                     4) Apply Early
                     5) Apply Late
                     6) Item Borrowing Application
-                    7) Activity Room Borrowing Application\033[0m
-                    """);
+                    7) Activity Room Borrowing Application
+                    """));
             int itermNumber = 1;
             while (true) {
-                System.out.print(colorStore.yellow("[Enter your project number to start] "));
+                System.out.print(colorStore.purple("[Enter your project number to start] "));
                 String startProjectNumberForTest = input.nextLine();
 
                 if (!validation.judgeIsInt(startProjectNumberForTest)) {
@@ -231,29 +231,29 @@ public class SuperDriver {
                 break;
             }
 
-            System.out.print("""
-                    \n\033[35m----------------
+            System.out.print(colorStore.purple("""
+                    \n----------------
                      Update Options
                     ----------------
                     1) Cancel the Application
                     2) Application Succeeded
-                    3) Application Failed\033[0m
-                    """);
+                    3) Application Failed
+                    """));
 
             int option = 1;
             while (true) {
-                System.out.print("[Enter your option to update] ");
+                System.out.print(colorStore.purple("[Enter your option to update] "));
                 String optionForTest = input.nextLine();
 
                 if (!validation.judgeIsInt(optionForTest)) {
-                    System.out.print("[Please enter an integer option] ");
+                    System.out.print(colorStore.red("[Please enter an integer option] "));
                     continue;
                 }
 
                 option = Integer.parseInt(optionForTest);
 
                 if (option < 1 || option > 3) {
-                    System.out.print("[Please enter a number between 1 and 3] ");
+                    System.out.print(colorStore.red("[Please enter a number between 1 and 3] "));
                     continue;
                 }
 
@@ -277,14 +277,14 @@ public class SuperDriver {
                             flag = true;
                             break;
                         default:
-                            System.out.println("\033[35m<Please enter a valid option!>\033[0m");
+                            System.out.println(colorStore.red("<Please enter a valid option!>"));
                             break;
                     }
                     break;
                 }
             }
             if (!flag) {
-                System.out.println("\033[35m<Please enter a valid project number!>\033[0m");
+                System.out.println(colorStore.red("<Please enter a valid project number!>"));
             }
         }
     } // End of UpdateStatus()
@@ -293,16 +293,16 @@ public class SuperDriver {
     // The option 4 : Display Your Projects
     protected void displayPersonalProject() {
 
-        System.out.println("\033[36m\n---------------------------\033[0m");
-        System.out.println("\033[36m Display Personal Projects \033[0m");
-        System.out.println("\033[36m---------------------------\033[0m");
+        System.out.println(colorStore.cyan("\n---------------------------"));
+        System.out.println(colorStore.cyan(" Display Personal Projects "));
+        System.out.println(colorStore.cyan("---------------------------"));
         if (studentStore.isEmpty()) {
-            System.out.println("\033[36m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first.>"));
         } else {
-        System.out.print("\033[36m[Enter your studentID] \033[0m");
+        System.out.print(colorStore.cyan("[Enter your studentID] "));
         String studentID = input.nextLine().trim();
         while (studentID.length() != 12 || !validation.judgeID(studentID)) {
-            System.out.print("\033[36m[Please enter a valid student ID] \033[0m");
+            System.out.print(colorStore.red("[Please enter a valid student ID] "));
             studentID = input.nextLine().trim();
         }
 
@@ -315,7 +315,7 @@ public class SuperDriver {
             }
         }
         if (!flag) {
-            System.out.println("\033[36m<Student ID does not exist!>\033[0m");
+            System.out.println(colorStore.red("<Student ID does not exist!>"));
         }
 }
     } // End of DisplayPersonalProject
@@ -324,11 +324,11 @@ public class SuperDriver {
     // The option 5 : Display Everyone's Projects
     protected void displayAllProjects() {
 
-        System.out.println("\033[94m\n----------------------\033[0m");
-        System.out.println("\033[94m Display All Projects \033[0m");
-        System.out.println("\033[94m----------------------\033[0m");
+        System.out.println(colorStore.brightBlue("\n----------------------"));
+        System.out.println(colorStore.brightBlue(" Display All Projects "));
+        System.out.println(colorStore.brightBlue("----------------------"));
         if (studentStore.isEmpty()) {
-            System.out.println("\033[94m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first.>"));
         } else {
                 for (int i = 0; i < studentStore.size(); i++) {
                     System.out.println(studentStore.get(i));
@@ -374,12 +374,12 @@ public class SuperDriver {
     // The option 7 : (To Sort in Ascending Order by StudentID)
     protected void sortStudentID() {
 
-        System.out.println("\033[94m\n------------------------------------------------\033[0m");
-        System.out.println("\033[94m Sort StudentsID and Display Everyone's Projects \033[0m");
-        System.out.println("\033[94m-------------------------------------------------\033[0m");
+        System.out.println(colorStore.brightBlue("\n------------------------------------------------"));
+        System.out.println(colorStore.brightBlue(" Sort StudentsID and Display Everyone's Projects "));
+        System.out.println(colorStore.brightBlue("-------------------------------------------------"));
 
         if (studentStore.isEmpty()) {
-            System.out.println("\033[94m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first.>"));
         } else {
             int min;
             for (int i = 0; i < studentStore.size() - 1; i++) {
@@ -403,17 +403,17 @@ public class SuperDriver {
     // The option 8 : Delete Student from List
     protected void deleteStudent() {
 
-        if (studentStore.isEmpty()) {
-            System.out.println("\033[32m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
-        } else {
-            System.out.println("\033[35m\n----------------\033[0m");
-            System.out.println("\033[35m Delete Student \033[0m");
-            System.out.println("\033[35m----------------\033[0m");
+        System.out.println(colorStore.purple("\n----------------"));
+        System.out.println(colorStore.purple(" Delete Student "));
+        System.out.println(colorStore.purple("----------------"));
 
-            System.out.print("\033[35m[Enter studentID to delete] \033[0m");
+        if (studentStore.isEmpty()) {
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first.>"));
+        } else {
+            System.out.print(colorStore.purple("[Enter studentID to delete] "));
             String studentID = input.nextLine();
             while (!(validation.judgeID(studentID))) {
-                System.out.print("\033[35m[Please enter a valid student ID] \033[0m");
+                System.out.print(colorStore.red("[Please enter a valid student ID] "));
                 studentID = input.nextLine();
             }
 
@@ -425,7 +425,7 @@ public class SuperDriver {
                 }
             }
             if (!flag) {
-                System.out.println("\033[35m<Student Not Found!>\033[0m");
+                System.out.println(colorStore.red("<Student Not Found!>"));
             }
         }
     } // End of deleteStudent()
@@ -434,15 +434,15 @@ public class SuperDriver {
     // The option 9
     protected void searchStudentWithName() {
 
-        System.out.println("\033[36m\n--------------------------\033[0m");
-        System.out.println("\033[36m Search Student with Name \033[0m");
-        System.out.println("\033[36m--------------------------\033[0m");
+        System.out.println(colorStore.cyan("\n--------------------------"));
+        System.out.println(colorStore.cyan(" Search Student with Name "));
+        System.out.println(colorStore.cyan("--------------------------"));
 
         if (studentStore.isEmpty()) {
-            System.out.println("\033[36m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first.>"));
         } else {
 
-            System.out.print("\033[36m[Enter a name to search] \033[0m");
+            System.out.print(colorStore.cyan("[Enter a name to search] "));
             String name = input.nextLine().trim();
 
             boolean flag = false;
@@ -453,7 +453,7 @@ public class SuperDriver {
                 }
             }
             if (!flag) {
-                System.out.println("\033[36m<Name does not exist!>\033[0m");
+                System.out.println(colorStore.cyan("<Name does not exist!>"));
             }
 
         }
