@@ -120,22 +120,21 @@ public class SuperDriver {
     // The option 2 : Start Project
     protected void startProject() {
 
-        System.out.println("\033[32m\n---------------\033[0m");
-        System.out.println("\033[32m Start Project \033[0m");
-        System.out.println("\033[32m---------------\033[0m");
+        System.out.println(colorStore.green("\n---------------"));
+        System.out.println(colorStore.green(" Start Project "));
+        System.out.println(colorStore.green("---------------"));
 
         if (studentStore.isEmpty()) {
-            System.out.println("\033[32m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first (Option 1).>"));
         } else {
-            System.out.print("\033[32m[Enter student ID to start project] \033[0m");
+            System.out.print(colorStore.green("[Enter student ID to start project] "));
             String studentID = input.nextLine();
             while (!validation.judgeID(studentID) || !validation.judgeIsLong(studentID)) {
-                System.out.print("\033[32m[Please enter a valid student ID] \033[0m");
+                System.out.print(colorStore.red("[Please enter a valid student ID] "));
                 studentID = input.nextLine();
             }
 
-            System.out.print("""
-                    \033[32m
+            System.out.print(colorStore.green("""
                     -------------------------
                      Choose Project to Start
                     -------------------------
@@ -146,15 +145,27 @@ public class SuperDriver {
                     5) Apply Late
                     6) Item Borrowing Application
                     7) Activity Room Borrowing Application
-                    8) Accommodation Notice
-                    \033[0m""");
-            System.out.print("\033[32m[Enter your project number] \033[0m");
-            String optionForTest = input.nextLine();
-            while (!validation.judgeIsInt(optionForTest)) {
-                System.out.print("\033[32m[Please enter an integer option] \033[0m");
-                optionForTest = input.nextLine();
+                    """));
+
+            int option = 1;
+            while (true) {
+                System.out.print(colorStore.green("[Enter your project number] "));
+                String optionForTest = input.nextLine();
+
+                if (!validation.judgeIsInt(optionForTest)) {
+                    System.out.print(colorStore.red("[Please enter an integer option] "));
+                    continue;
+                }
+
+                option = Integer.parseInt(optionForTest);
+
+                if (option < 1 || option > 7) {
+                    System.out.print(colorStore.red("[Please enter an option between 1 and 7] "));
+                    continue;
+                }
+
+                break;
             }
-            int option = Integer.parseInt(optionForTest);
 
             boolean flag = false;
             for (int i = 0; i < studentStore.size(); i++) {
@@ -165,7 +176,7 @@ public class SuperDriver {
                 }
             }
             if (!flag) {
-                System.out.println("\033[32m<You have not been added to the student list yet!>\033[0m");
+                System.out.println(colorStore.red("<You have not been added to the student list yet!>"));
             }
         }
     } // End of StartProject()
@@ -174,12 +185,12 @@ public class SuperDriver {
     // The option 3 : Update Project Status
     protected void updateStatus() {
 
-        System.out.println("\033[35m\n---------------\033[0m");
+        System.out.println(colorStore.purple("\n---------------"));
         System.out.println("\033[35m Update Status \033[0m");
         System.out.println("\033[35m---------------\033[0m");
 
         if (studentStore.isEmpty()) {
-            System.out.println("\033[35m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
+            System.out.println(colorStore.red("<Before you choose other option, you should add a student at first (Option 1).>"));
         } else {
             System.out.print("\033[35m[Enter your studentID] \033[0m");
             String studentID = input.nextLine();

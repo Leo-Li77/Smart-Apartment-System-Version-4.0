@@ -18,4 +18,8 @@ public class ColorStore {
         return "\u001B[33m" + string + "\u001B[0m";
     }
 
+    public String purple(String string) {
+        return "\u001B[35m" + string + "\u001B[0m";
+    }
+
 }

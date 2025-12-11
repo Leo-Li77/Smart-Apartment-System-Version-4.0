@@ -75,7 +75,7 @@ public class Driver extends SuperDriver {
 
         int option = getOption();
         if (option == 0) {
-            System.out.println("\033[34m\n\nExiting Program...\033[0m\n");
+            System.out.println(colorStore.blue("\n\nExiting Program...\n"));
         }
         while (option != 0) {
             switch (option) {
@@ -88,9 +88,8 @@ public class Driver extends SuperDriver {
                 case 7  ->  sortStudentID();
                 case 8  ->  deleteStudent();
                 case 9  ->  searchStudentWithName();
-                default ->  System.out.println("\033[34m<Invalid option. Try again.>\033[0m");
             }
-            System.out.println("\033[34m\n<Press Enter to continue...>\033[0m");
+            System.out.println(colorStore.blue("\n<Press Enter to continue...>"));
             input.nextLine();
             option = getOption();
         }
