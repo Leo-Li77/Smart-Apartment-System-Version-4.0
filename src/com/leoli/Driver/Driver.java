@@ -10,7 +10,7 @@ public class Driver extends SuperDriver {
     public static void main(String[] args) {
 
         System.out.println("--------------------------------------");
-        System.out.println(" Student Apartment System Version 3.0 ");
+        System.out.println(" Student Apartment System-Version 4.0 ");
         System.out.println("--------------------------------------\n");
 
         Driver driver = new Driver();
@@ -31,7 +31,7 @@ public class Driver extends SuperDriver {
     public int getOption() {
 
         System.out.print(colorStore.blue("""
-                \n--------------------
+                \n\n\n--------------------
                  Operation Choosing
                 --------------------
                 0) Exit
@@ -90,8 +90,8 @@ public class Driver extends SuperDriver {
                 case 8  ->  deleteStudent();
                 case 9  ->  searchStudentWithName();
             }
-            System.out.println(colorStore.blue("\n<Press Enter to continue...>"));
-            input.nextLine();
+//            System.out.println(colorStore.blue("\n<Press Enter to continue...>"));
+//            input.nextLine();
             option = getOption();
         }
 

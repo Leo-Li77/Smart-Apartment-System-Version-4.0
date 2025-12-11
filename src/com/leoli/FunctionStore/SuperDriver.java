@@ -214,7 +214,7 @@ public class SuperDriver {
                     7) Activity Room Borrowing Application
                     """));
             int itermNumber = 1;
-            System.out.print(colorStore.purple("[Enter your project number to start] "));
+            System.out.print(colorStore.purple("[Enter your project number to update] "));
             while (true) {
                 String startProjectNumberForTest = input.nextLine();
 
