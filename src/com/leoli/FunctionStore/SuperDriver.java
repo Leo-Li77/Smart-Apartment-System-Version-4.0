@@ -11,60 +11,65 @@ import java.nio.file.Path;
 import com.leoli.Student.StudentApartment;
 import com.leoli.Validations.Validation;
 import com.leoli.FunctionStore.Functions;
+import com.leoli.FunctionStore.ColorStore;
 
 public class SuperDriver {
 
     // Fields
-    ArrayList<StudentApartment> studentStore = new ArrayList<>();
+    protected ArrayList<StudentApartment> studentStore = new ArrayList<>();
     protected Scanner input = new Scanner(System.in);
 
     // Create an object of Validation Class to use the methods in it
-    Validation validation = new Validation();
-    Functions functions = new Functions();
+    protected Validation validation = new Validation();
+    protected Functions functions = new Functions();
+    protected ColorStore colorStore = new ColorStore();
 
 
-    // The option 1 : Add New Student and Start Iterm
+    // The option 1 : Add New Student and Start Project
     protected void addAndStart() {
 
-        System.out.println("\033[33m\n---------------\033[0m");
-        System.out.println("\033[33m Start Project \033[0m");
-        System.out.println("\033[33m---------------\033[0m");
+        System.out.println(colorStore.yellow("\n---------------"));
+        System.out.println(colorStore.yellow(" Start Project "));
+        System.out.println(colorStore.yellow("---------------"));
 
         // input and validate the name
-        System.out.print("\033[33m[Enter name]         \033[0m");
+        System.out.print(colorStore.yellow("[Enter name]         "));
         String name = input.nextLine();
         while (!(validation.judgeName(name))) {
-            System.out.print("\033[33m[Please enter a name longer than 2 words] \033[0m");
+            System.out.print(colorStore.red("[Please enter a name longer than 2 words] "));
             name = input.nextLine();
         }
 
         // input and validate studentID
-        System.out.print("\033[33m[Enter student ID]   \033[0m");
+        System.out.print(colorStore.yellow("[Enter student ID]   "));
         String studentIDForTest = input.nextLine();
-        while (!validation.judgeID(studentIDForTest) || !validation.judgeUniqueID(studentIDForTest, studentStore)) {
+        while (!validation.judgeID(studentIDForTest) || !validation.judgeUniqueID(studentIDForTest, studentStore) || !validation.judgeIsLong(studentIDForTest)) {
             if (!validation.judgeUniqueID(studentIDForTest, studentStore)) {
-                System.out.print("\033[33m[This student ID is already registered] \033[0m");
+                System.out.print(colorStore.red("[This student ID is already registered] "));
+                studentIDForTest = input.nextLine();
+            } else if (!validation.judgeIsLong(studentIDForTest)) {
+                System.out.print(colorStore.red("[All elements should be numbers] "));
                 studentIDForTest = input.nextLine();
             } else {
-                System.out.print("\033[33m[Student ID must be exactly 12 digits] \033[0m");
+                System.out.print(colorStore.red("[Student ID must be exactly 12 digits] "));
                 studentIDForTest = input.nextLine();
             }
         }
         String studentID = studentIDForTest;
 
         // input and validate phone number
-        System.out.print("\033[33m[Enter phone number] \033[0m");
+        System.out.print(colorStore.yellow("[Enter phone number] "));
         String phoneNumber = input.nextLine();
-        while (!(validation.judgePhoneNumber(phoneNumber))) {
-            System.out.print("\033[33m[Please enter a valid phone number] \033[0m");
+        while (!validation.judgePhoneNumber(phoneNumber)) {
+            System.out.print(colorStore.yellow("[Please enter a valid phone number] "));
             phoneNumber = input.nextLine();
         }
 
         StudentApartment newStudent = new StudentApartment(name, studentID, phoneNumber);
         studentStore.add(newStudent);
 
-        System.out.print("""
-                \033[33m-------------------------
+        System.out.print(colorStore.yellow("""
+                -------------------------
                  Choose Project to Start
                 -------------------------
                 1) Accommodation Application
@@ -74,15 +79,28 @@ public class SuperDriver {
                 5) Apply Late
                 6) Item Borrowing Application
                 7) Activity Room Borrowing Application
-                8) Accommodation Notice\033[0m
-                """);
-        System.out.print("\033[33m[Enter your project number to start] \033[0m");
-        String startProjectNumberForTest = input.nextLine();
-        while (!validation.judgeIsInt(startProjectNumberForTest)) {
-            System.out.print("\033[32m[Please enter an integer option] \033[0m");
-            startProjectNumberForTest = input.nextLine();
+                """));
+
+        int startProjectNumber = 1;
+        while (true) {
+            System.out.print(colorStore.yellow("[Enter your project number to start] "));
+            String startProjectNumberForTest = input.nextLine();
+
+            if (!validation.judgeIsInt(startProjectNumberForTest)) {
+                System.out.print(colorStore.red("[Please enter an integer number] "));
+                continue;
+            }
+
+            startProjectNumber = Integer.parseInt(startProjectNumberForTest);
+
+            if (startProjectNumber < 1 || startProjectNumber > 7) {
+                System.out.print(colorStore.red("[Please enter a number between 1 and 7] "));
+                continue;
+            }
+
+            break;
         }
-        int startProjectNumber = Integer.parseInt(startProjectNumberForTest);
+
 
         boolean flag1 = false;
         for (int i = 0; i < studentStore.size(); i++) {
@@ -93,7 +111,7 @@ public class SuperDriver {
             }
         }
         if (!flag1) {
-            System.out.println("\033[33m<Please enter a valid student ID!>\033[0m");
+            System.out.println(colorStore.red("<Please enter a valid student ID!>"));
         }
 
     } // End of AddAndStart
@@ -109,10 +127,9 @@ public class SuperDriver {
         if (studentStore.isEmpty()) {
             System.out.println("\033[32m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
         } else {
-
             System.out.print("\033[32m[Enter student ID to start project] \033[0m");
             String studentID = input.nextLine();
-            while (!(validation.judgeID(studentID) || !validation.judgeIsLong(studentID))) {
+            while (!validation.judgeID(studentID) || !validation.judgeIsLong(studentID)) {
                 System.out.print("\033[32m[Please enter a valid student ID] \033[0m");
                 studentID = input.nextLine();
             }
@@ -166,7 +183,7 @@ public class SuperDriver {
         } else {
             System.out.print("\033[35m[Enter your studentID] \033[0m");
             String studentID = input.nextLine();
-            while (!(validation.judgeID(studentID) || !validation.judgeIsLong(studentID))) {
+            while (!validation.judgeID(studentID) || !validation.judgeIsLong(studentID)) {
                 System.out.print("\033[35m[Please enter a valid student ID] \033[0m");
                 studentID = input.nextLine();
             }
@@ -181,16 +198,27 @@ public class SuperDriver {
                     4) Apply Early
                     5) Apply Late
                     6) Item Borrowing Application
-                    7) Activity Room Borrowing Application
-                    8) Accommodation Notice\033[0m
+                    7) Activity Room Borrowing Application\033[0m
                     """);
-            System.out.print("\033[35m[Enter your project number to update] \033[0m");
-            String itermNumberForTest = input.nextLine();
-            while (!validation.judgeIsInt(itermNumberForTest)) {
-                System.out.print("\033[35m[Please enter an integer option] \033[0m");
-                itermNumberForTest = input.nextLine();
+            int itermNumber = 1;
+            while (true) {
+                System.out.print(colorStore.yellow("[Enter your project number to start] "));
+                String startProjectNumberForTest = input.nextLine();
+
+                if (!validation.judgeIsInt(startProjectNumberForTest)) {
+                    System.out.print(colorStore.red("[Please enter an integer number] "));
+                    continue;
+                }
+
+                itermNumber = Integer.parseInt(startProjectNumberForTest);
+
+                if (itermNumber < 1 || itermNumber > 7) {
+                    System.out.print(colorStore.red("[Please enter a number between 1 and 7] "));
+                    continue;
+                }
+
+                break;
             }
-            int itermNumber = Integer.parseInt(itermNumberForTest);
 
             System.out.print("""
                     \n\033[35m----------------
@@ -200,13 +228,26 @@ public class SuperDriver {
                     2) Application Succeeded
                     3) Application Failed\033[0m
                     """);
-            System.out.print("\033[35mEnter your update option] \033[0m");
-            String optionNumberForTest = input.nextLine();
-            while (!validation.judgeIsInt(optionNumberForTest)) {
-                System.out.print("\033[35m[Please enter an integer option] \033[0m");
-                optionNumberForTest = input.nextLine();
+
+            int option = 1;
+            while (true) {
+                System.out.print("[Enter your option to update] ");
+                String optionForTest = input.nextLine();
+
+                if (!validation.judgeIsInt(optionForTest)) {
+                    System.out.print("[Please enter an integer option] ");
+                    continue;
+                }
+
+                option = Integer.parseInt(optionForTest);
+
+                if (option < 1 || option > 3) {
+                    System.out.print("[Please enter a number between 1 and 3] ");
+                    continue;
+                }
+
+                break;
             }
-            int option = Integer.parseInt(optionNumberForTest);
 
             boolean flag = false;
             for (int i = 0; i < studentStore.size(); i++) {
@@ -248,10 +289,10 @@ public class SuperDriver {
             System.out.println("\033[36m<Before you choose other option, you should add a student at first (Option 1).>\033[0m");
         } else {
         System.out.print("\033[36m[Enter your studentID] \033[0m");
-        String studentID = input.nextLine();
-        while (studentID.length() != 12 || !validation.judgeIsLong(studentID)) {
+        String studentID = input.nextLine().trim();
+        while (studentID.length() != 12 || !validation.judgeID(studentID)) {
             System.out.print("\033[36m[Please enter a valid student ID] \033[0m");
-            studentID = input.nextLine();
+            studentID = input.nextLine().trim();
         }
 
         boolean flag = false;

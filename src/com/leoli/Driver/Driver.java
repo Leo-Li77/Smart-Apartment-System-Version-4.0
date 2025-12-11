@@ -2,11 +2,10 @@ package com.leoli.Driver;
 
 import com.leoli.FunctionStore.SuperDriver;
 import com.leoli.Validations.Validation;
+import com.leoli.FunctionStore.ColorStore;
 
 
 public class Driver extends SuperDriver {
-
-    private Validation validation = new Validation();
 
     public static void main(String[] args) {
 
@@ -30,8 +29,8 @@ public class Driver extends SuperDriver {
     // Show the menu and get option from user.
     public int getOption() {
 
-        System.out.print("""
-                \033[34m\n--------------------
+        System.out.print(colorStore.blue("""
+                \n--------------------
                  Operation Choosing
                 --------------------
                 0) Exit
@@ -43,16 +42,28 @@ public class Driver extends SuperDriver {
                 6) Accommodation Agreement
                 7) Sort StudentsID and Display Everyone's Projects
                 8) Delete Student from List
-                9) Search Student with Name\033[0m
-                """);
+                9) Search Student with Name
+                """));
 
-        System.out.print("\033[34m[Enter the number of option to handle] \033[0m");
-        String optionForTest = input.nextLine();
-        while (!(validation.judgeIsInt(optionForTest))) {
-            System.out.print("\033[34m[Please enter an integer option] \033[0m");
-            optionForTest = input.nextLine();
+        int option = 1;
+        while (true) {
+            System.out.print(colorStore.blue("[Enter option to handle] "));
+            String optionForTest = input.nextLine();
+
+            if (!validation.judgeIsInt(optionForTest)) {
+                System.out.print(colorStore.red("[Please enter a integer option] "));
+                continue;
+            }
+
+            option = Integer.parseInt(optionForTest);
+
+            if (option < 0 || option > 9) {
+                System.out.print(colorStore.red("[Please enter an option between 1 and 9] "));
+                continue;
+            }
+
+            break;
         }
-        int option =  Integer.parseInt(optionForTest);
 
         return option;
 
