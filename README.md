@@ -11,7 +11,7 @@
 ### Release Date :
 - **2025-12-09**
 ### Team Members & Responsibilities :
-- **Member A ( Leo Li ) :** Final Theme + Project Structure + Code Writing + Debug + Video Guideline + README.md Edition
+- **Member A ( Leo Li ) :** Final Theme + Project Structure + Code Writing + Test and Debug + Video Guideline + README.md Edition
 - **Member B ( Janser Zhou ) :** Video Shooting + Program Testing + Problem Feedback
 - **Member C ( Ethan Tian ) :** Video Edition + Program Testing + Problem Feedback
 
