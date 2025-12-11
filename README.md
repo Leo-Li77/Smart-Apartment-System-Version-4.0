@@ -6,6 +6,7 @@
 - **Add the Fuzzy Search Function Based on Name**
 - **Introduce Packages to Manage Source Files**
 - **Add Numerous Validations to Ensure the Stability**
+- **Add More Different Colors and Set the Error Message to Red**
 ### Release Date :
 - **2025-12-09**
 ### Team Members & Responsibilities :
