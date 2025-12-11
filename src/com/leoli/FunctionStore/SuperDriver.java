@@ -61,7 +61,7 @@ public class SuperDriver {
         System.out.print(colorStore.yellow("[Enter phone number] "));
         String phoneNumber = input.nextLine();
         while (!validation.judgePhoneNumber(phoneNumber)) {
-            System.out.print(colorStore.yellow("[Please enter a valid phone number] "));
+            System.out.print(colorStore.red("[Please enter a valid phone number] "));
             phoneNumber = input.nextLine();
         }
 
